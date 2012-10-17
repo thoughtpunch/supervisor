@@ -1,6 +1,6 @@
 module Supervisor
   class Server
-    attr_accessor :name,:host,:rails_path,:connection,:servers
+    attr_accessor :name,:host,:rails_path,:connection
     @@instance_collector = []
     def initialize(name="default",host="localhost",rails_path=nil,username=nil,password=nil)
       unless host == "localhost"
@@ -14,7 +14,10 @@ module Supervisor
       @name = name
       @host = host
       @@instance_collector << self
-      @servers = @@instance_collector
+    end
+
+    def self.servers
+      return @@instance_collector
     end
 
     def delayed_job_workers

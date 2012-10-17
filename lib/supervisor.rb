@@ -71,13 +71,13 @@ module Supervisor
         Supervisor::Server.new #init a default local server
       end
     end
-    return DelayedJobMonitor::Server.servers
+    return Supervisor::Server.servers
   end
 
   def self.start!
     begin
       #Supervisor.establish_connection
-      #Supervisor.initialize_servers
+      Supervisor.initialize_servers
       Supervisor::App.run!
     rescue
       raise "Could not start Supervisor App: #{$!}"

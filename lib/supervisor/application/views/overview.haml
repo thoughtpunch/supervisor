@@ -24,7 +24,7 @@
         %td.status
           %a{:href => u('/failed')} Failed Jobs
         %td= delayed_jobs(:failed).count
-  -#.queues
+  .queues
     %h1
       Queues
     %p.sub
@@ -38,7 +38,7 @@
         %th Working
         %th Pending
         %th Failed
-      - Supervisor::Job.select(:queue).map(&:queue).compact.uniq.each do |q|
+      - delayed_job.select(:queue).map(&:queue).compact.uniq.each do |q|
         %tr
           -#%td= supervisor[:database]["host"].to_s
           %td.status
