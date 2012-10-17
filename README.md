@@ -11,9 +11,9 @@ Built for/by [Contently](http://www.contently.com) by [thoughpunch](http://www.a
 
 ## Description
 
-supervisor is a Sinatra-based web front-end for managing [Delayed Jobs](https://github.com/collectiveidea/delayed_job) heavily inspired by the excellent [delayed_job_web](https://github.com/ejschmitt/delayed_job_web) gem.
+**Supervisor** is a Sinatra-based web front-end for managing [Delayed Jobs](https://github.com/collectiveidea/delayed_job) heavily inspired by the excellent [delayed_job_web](https://github.com/ejschmitt/delayed_job_web) gem.
 
-What makes supervisor unique is that it can be run in one of two modes. 'Gem' mode runs the mounted Sinatra app inside your Rails app via a route. 'Stand Alone' mode can be run from the same server or even a different location, provided that you configure the database settings to connect to the instance that is storing the delayed jobs. It's a Sinatra app, it's a Gem, it's a Sinatra app inside a gem!
+What makes **Supervisor** unique is that it can be run in one of two modes. 'Gem' mode runs the mounted Sinatra app inside your Rails app via a route. 'Stand Alone' mode can be run from the same server or even a different location, provided that you configure the database settings to connect to the instance that is storing the delayed jobs. It's a Sinatra app, it's a Gem, it's a Sinatra app inside a gem!
 
 ## Installation
 
@@ -26,8 +26,15 @@ What makes supervisor unique is that it can be run in one of two modes. 'Gem' mo
 * ```match "/jobs" => Supervisor::App, :anchor => false```
 
 **Stand Alone Mode**
-* Cloning the entire repo into a directory and run the following command will start the stand-alone Sinatra app.
-* ``ruby supervisor_app.rb```
+* Cloning the entire repo into its own directory.
+* Add Delayed Job database and host info in the ```config.yml``` file
+* Run ``ruby supervisor_app.rb```
+* **Supervisor** should be up and running on ```http://localhost:4567```
+
+## Known Issues ##
+
+1. Running as a gem inside a Rails app fails to display worker info.
+
 
 ## RoadMap
 
