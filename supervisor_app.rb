@@ -1,4 +1,4 @@
-require './lib/delayed_job_monitor.rb'
+require './lib/supervisor.rb'
 begin
   Supervisor.start!
 rescue

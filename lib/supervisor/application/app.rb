@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'supervisor'
 require 'active_support'
 require 'active_record'
 require 'delayed_job'
@@ -12,6 +13,10 @@ module Supervisor
     set :views,  File.expand_path('../views', __FILE__)
     set :haml, { :format => :html5 }
     set :port, 4567
+
+    if defined? Supervisor::Server
+      Supervisor.initialize_servers
+    end
 
     def delayed_job
       begin
