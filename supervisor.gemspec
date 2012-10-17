@@ -5,7 +5,7 @@ require 'supervisor/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "supervisor"
-  gem.version       = Ruby::supervisor::VERSION
+  gem.version       = Supervisor::VERSION
   gem.authors       = ["Dan Barrett"]
   gem.email         = ["dbarrett83@gmail.com"]
   gem.description   = "Manager for Asynchronous Jobs & Workers"
