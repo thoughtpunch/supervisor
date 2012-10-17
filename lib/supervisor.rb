@@ -59,9 +59,9 @@ module Supervisor
   end
 
   def self.initialize_servers
-    if Supervisor[:hosts].first["host"].nil? && !delayed_job_running_locally
+    if Supervisor[:hosts].first["host"].nil? && !delayed_job_running_locally?
       raise "No job worker machines (host) configured and no workers running locally. Please add host in config.yml"
-    elsif Supervisor[:hosts].first["host"].nil? && delayed_job_running_locally
+    elsif Supervisor[:hosts].first["host"].nil? && delayed_job_running_locally?
       Supervisor::Server.new
     else
       Supervisor[:hosts].each do |host|
@@ -84,17 +84,4 @@ module Supervisor
     end
   end
 
-end
-
-#Required to use Delayed::Job subclasses outside Rails app.
-if Supervisor.app_mode?
-  class Rails
-    def self.root
-      return Pathname.new(Dir.pwd)
-    end
-
-    def self.logger
-      return nil
-    end
-  end
 end
