@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.add_dependency(%q<sinatra>)
   gem.add_dependency(%q<haml>)
+  gem.add_dependency(%q<hashie>)
   gem.add_dependency(%q<activerecord>)
   gem.add_dependency(%q<delayed_job>)
   gem.add_dependency(%q<rdoc>)
