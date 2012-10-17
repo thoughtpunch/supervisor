@@ -16,8 +16,8 @@ module Supervisor
 
     if (Supervisor.methods - Object.methods).count > 1
       begin
-        Supervisor.class_eval("initialize_servers")
-        Supervisor.class_eval("establish_connection")
+        Supervisor.initialize_servers
+        Supervisor.establish_connection
       rescue
         p "Supervisor libraries not loaded. Partial functionality"
       end
@@ -25,7 +25,7 @@ module Supervisor
 
     def delayed_job
       begin
-        if Supervisor.connected?
+        if (Supervisor.methods - Object.methods).count > 1
           Supervisor::Job
         else
           Delayed::Job

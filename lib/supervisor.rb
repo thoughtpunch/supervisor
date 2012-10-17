@@ -76,7 +76,7 @@ module Supervisor
 
   def self.start!
     begin
-      #Supervisor.establish_connection
+      Supervisor.establish_connection
       Supervisor.initialize_servers
       Supervisor::App.run!
     rescue
