@@ -1,9 +1,9 @@
-require "ruby-overseer/version"
-require "ruby-overseer/job"
-require "ruby-overseer/server"
-require "ruby-overseer/worker"
+require "supervisor/version"
+require "supervisor/job"
+require "supervisor/server"
+require "supervisor/worker"
 
-module Overseer
+module Supervisor
 
   def self.app_mode?
     return !ENV["RAILS_ENV"].present?
@@ -12,7 +12,7 @@ module Overseer
 end
 
 #Required to use Delayed::Job subclasses outside Rails app.
-if Overseer.app_mode?
+if Supervisor.app_mode?
   class Rails
     def self.root
       return Pathname.new(Dir.pwd)

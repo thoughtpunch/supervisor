@@ -4,7 +4,7 @@ require 'active_record'
 require 'delayed_job'
 require 'haml'
 
-module Overseer
+module Supervisor
   class App < Sinatra::Base	
   	set :root, File.dirname(__FILE__)
     set :static, true
@@ -15,8 +15,8 @@ module Overseer
 
     def delayed_job
       begin
-        if Overseer.connected?
-          Overseer::Job
+        if Supervisor.connected?
+          Supervisor::Job
         else
           Delayed::Job
         end

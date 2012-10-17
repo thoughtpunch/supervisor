@@ -1,4 +1,4 @@
-module Overseer
+module Supervisor
   class Server
     attr_accessor :name,:host,:rails_path,:connection,:servers
     @@instance_collector = []

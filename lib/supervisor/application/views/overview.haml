@@ -38,9 +38,9 @@
         %th Working
         %th Pending
         %th Failed
-      - Overseer::Job.select(:queue).map(&:queue).compact.uniq.each do |q|
+      - Supervisor::Job.select(:queue).map(&:queue).compact.uniq.each do |q|
         %tr
-          -#%td= Overseer[:database]["host"].to_s
+          -#%td= supervisor[:database]["host"].to_s
           %td.status
             %a{:href => u("/queue/#{q}")}= "#{q.split("_").map(&:capitalize).join(" ")}"
           %td= delayed_job.where(:queue=>q).count
@@ -61,7 +61,7 @@
         %th Mem %
         %th Started
         %th Run Time
-      - Overseer::Server.servers.each do |server|
+      - Supervisor::Server.servers.each do |server|
         -server.delayed_job_workers.each do |worker|
           %tr
             %td= worker.host
