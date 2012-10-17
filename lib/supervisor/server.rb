@@ -1,3 +1,6 @@
+require 'hashie'
+require 'net/ssh'
+
 module Supervisor
   class Server
     attr_accessor :name,:host,:rails_path,:connection

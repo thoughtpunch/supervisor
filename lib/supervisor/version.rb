@@ -1,3 +1,3 @@
 module Supervisor
-   VERSION = "0.0.86"
+   VERSION = "0.0.88"
 end
