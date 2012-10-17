@@ -1,0 +1,28 @@
+#SUPERVISOR CONFIGURATION
+
+#DELAYED JOB WORKER MACHINES (hosts)
+# - Configure SSH connection info for the seperates hosts that are working delayed jobs
+# - To add additional host connections, simply add another nested entry below
+# - The Supervisor::Server module will establish SSH connections to each
+#    one to monitor, start, and stop delayed_job workers.
+#DELAYED JOB DATABASE (database)
+# - Configure an ActiveRecord connection to the database that is hosting the delay_jobs database
+# - Only 1 postgresql or sqlite database connection is supported at this time.
+
+application:
+  name:                       # used to parse Rails path, log paths, etc (optional)
+  email:                      # email upon failures,changes,etc (optional, not yet supp.)
+hosts:
+  - 
+    name:                     # 'nickname' of host
+    rails_path:               #  path of the Rails app on host machine, assumes '/var/www/RAILS_APP' by default
+    host:                     #  domain name of host for SSH connection
+    username:                 #  SSH Username
+    password:                 #  SSH Password
+database: 
+  host:                       # FQDN or IP Address of database server
+  port:                       # port
+  adapter:                    # 'postgresql' or 'sqlite'
+  database:                   # name of the database, just like in a Rails database.yml
+  username:                   # username
+  password:                   # password
