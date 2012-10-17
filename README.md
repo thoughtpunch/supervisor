@@ -23,7 +23,7 @@ What makes supervisor unique is that it can be run in one of two modes. 'Gem' mo
 
 **Gem Mode**
 * Mount the Sinatra app in your route.rb file like so:
-* ```match "/jobs" => supervisor::App, :anchor => false```
+* ```match "/jobs" => Supervisor::App, :anchor => false```
 
 **Stand Alone Mode**
 * Cloning the entire repo into a directory and run the following command will start the stand-alone Sinatra app.

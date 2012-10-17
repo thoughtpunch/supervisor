@@ -10,6 +10,16 @@ module Supervisor
     return !ENV["RAILS_ENV"].present?
   end
 
+  def start!
+    begin
+      #Supervisor.establish_connection
+      #Supervisor.initialize_servers
+      Supervisor::App.run!
+    rescue
+      raise "Could not start Supervisor App: #{$!}"
+    end
+  end
+
 end
 
 #Required to use Delayed::Job subclasses outside Rails app.
