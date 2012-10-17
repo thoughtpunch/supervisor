@@ -1,0 +1,15 @@
+%h1 Workers
+%p.sub
+  Delayed Job workers running on the configured hosts
+- if @workers.any?
+	%ul.worker
+		- @workers.each do |worker|
+			%li= worker.host
+	    %li= worker.name
+	    %li= worker.pid
+	    %li= worker.cpu
+	    %li= worker.mem
+	    %li= worker.started
+	    %li= worker.run_time
+- else
+	%p There are no Delayed Jobs workers running on any hosts.

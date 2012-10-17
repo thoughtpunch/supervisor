@@ -1,0 +1,13 @@
+%h1="#{params[:queue].split("_").map(&:capitalize).join(" ")}"
+- if @jobs.any?
+  %form{:method => 'POST', :action => u('failed/clear')}
+    %input{:type => 'submit', :value => 'Clear Failed Jobs'}
+  %form{:method => 'POST', :action => u('update/all')}
+    %input{:type => 'submit', :value => 'Retry Failed Jobs'}
+%p.sub
+  The list below contains jobs in the #{params[:queue].split("_").map(&:capitalize).join(" ")} queue.
+%p.sub= "Showing #{start} to #{start + per_page} of #{@all_jobs} pending jobs."
+%ul.job
+  - @jobs.each do |job|
+    = partial :job, {:job => job}
+= partial :next_more, :start => start, :total_size => @all_jobs, :per_page => per_page

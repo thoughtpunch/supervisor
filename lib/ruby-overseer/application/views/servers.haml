@@ -1,0 +1,16 @@
+%h1= @servers.first.name
+/ %h1 Servers
+/ %p.sub
+/   Servers running Delayed Jobs worker daemons
+/ - if @servers.any?
+/ 	%ul.server
+/ 		- @servers.each do |server|
+/ 			%li= server.host
+/ 	    %li= server.name
+/ 	    %li= server.pid
+/ 	    %li= server.cpu
+/ 	    %li= server.mem
+/ 	    %li= server.started
+/ 	    %li= server.run_time
+/ - else
+/ 	%p There are no Delayed Jobs servers running on any hosts.

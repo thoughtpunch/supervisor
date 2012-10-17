@@ -1,0 +1,110 @@
+.left_col
+  .overview  
+    %h1
+      Overview
+    %p.sub
+      Jobs in the Delayed_Job queue.
+    %table.overview
+      %tr
+        %th Status
+        %th Count
+      %tr
+        %td.status
+          %a{:href => u('/enqueued')} Enqueued Jobs
+        %td= delayed_job.count
+      %tr
+        %td.status
+          %a{:href => u('/working')} Working Jobs
+        %td= delayed_jobs(:working).count
+      %tr
+        %td.status
+          %a{:href => u('/pending')} Pending Jobs
+        %td= delayed_jobs(:pending).count
+      %tr{:class => delayed_jobs(:failed).count > 0 ? 'failure' : ''}
+        %td.status
+          %a{:href => u('/failed')} Failed Jobs
+        %td= delayed_jobs(:failed).count
+  -#.queues
+    %h1
+      Queues
+    %p.sub
+      Jobs by Queue
+    %table.overview
+      %tr
+        -#%th Host
+        %th Queue
+        %th Count
+        %th Priority
+        %th Working
+        %th Pending
+        %th Failed
+      - Overseer::Job.select(:queue).map(&:queue).compact.uniq.each do |q|
+        %tr
+          -#%td= Overseer[:database]["host"].to_s
+          %td.status
+            %a{:href => u("/queue/#{q}")}= "#{q.split("_").map(&:capitalize).join(" ")}"
+          %td= delayed_job.where(:queue=>q).count
+          %td= delayed_job.where(:queue=>q).select(:priority).map(&:priority).uniq.sort.join(", ")
+          %td= delayed_job.where(:queue=>q).where("locked_at IS NOT NULL").count
+          %td= delayed_job.where(:queue=>q).where("locked_at IS NULL AND last_error IS NULL").count
+          %td{:style => "color:red;"}= delayed_job.where(:queue=>q).where("last_error IS NOT NULL").count
+  -#.workers
+    %h1 Workers
+    %p.sub
+      Delayed Jobs workers
+    %table.overview
+      %tr
+        %th Host
+        %th Worker
+        %th PID
+        %th CPU %
+        %th Mem %
+        %th Started
+        %th Run Time
+      - Overseer::Server.servers.each do |server|
+        -server.delayed_job_workers.each do |worker|
+          %tr
+            %td= worker.host
+            %td= worker.name.split(".").last
+            %td= worker.pid
+            %td= worker.cpu
+            %td= worker.mem
+            %td= worker.started
+            %td= worker.run_time
+  = poll
+-#.right_col
+  .logs
+    %h1 Logs
+    %p.sub
+      Delayed Jobs Logs
+    .log_box
+      \> Logs...
+  .stats
+    %h1 Stats
+    %p.sub
+      Delayed Job Stats
+    %table.overview
+      %tr
+        %th 
+        %th Today
+        %th This Week
+        %th This Month
+        %th All Time
+      %tr
+        %td Completed Jobs
+        %td 0
+        %td 0
+        %td 0
+        %td 0
+      %tr
+        %td Deleted Jobs
+        %td 0
+        %td 0
+        %td 0
+        %td 0
+      %tr
+        %td Failed Jobs
+        %td 0
+        %td 0
+        %td 0
+        %td 0
