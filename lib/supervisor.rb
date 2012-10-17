@@ -1,7 +1,8 @@
-require "./lib/supervisor/job"
-require "./lib/supervisor/server"
-require "./lib/supervisor/worker"
-require "./lib/supervisor/version"
+require "supervisor/job"
+require "supervisor/server"
+require "supervisor/worker"
+require "supervisor/version"
+require "supervisor/application/app"
 
 module Supervisor
 
