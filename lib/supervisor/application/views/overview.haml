@@ -49,19 +49,19 @@
           %td= delayed_job.where(:queue=>q).where("locked_at IS NULL AND last_error IS NULL").count
           %td{:style => "color:red;"}= delayed_job.where(:queue=>q).where("last_error IS NOT NULL").count
   .workers
-    - if Supervisor::Server.servers.any?
-      %h1 Workers
-      %p.sub
-        Delayed Jobs workers
-      %table.overview
-        %tr
-          %th Host
-          %th Worker
-          %th PID
-          %th CPU %
-          %th Mem %
-          %th Started
-          %th Run Time
+    %h1 Workers
+    %p.sub
+      Delayed Jobs workers
+    %table.overview
+      %tr
+        %th Host
+        %th Worker
+        %th PID
+        %th CPU %
+        %th Mem %
+        %th Started
+        %th Run Time
+      - if Supervisor::Server.servers.any?
         - Supervisor::Server.servers.each do |server|
           -server.delayed_job_workers.each do |worker|
             %tr

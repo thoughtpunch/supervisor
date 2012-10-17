@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Dan Barrett"]
   gem.email         = ["dbarrett83@gmail.com"]
   gem.description   = "Manager for Asynchronous Jobs & Workers"
-  gem.summary       = "Manager for Asynchronous Jobs & Workers"
+  gem.summary       = "Manager for Asynchronous Jobs & Workerssss FTW"
   gem.homepage      = "http://www.github.com/thoughtpunch/supervisor"
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'supervisor'
 require 'active_support'
 require 'active_record'
 require 'delayed_job'
@@ -7,6 +6,7 @@ require 'haml'
 
 module Supervisor
   class App < Sinatra::Base	
+    require "supervisor"
   	set :root, File.dirname(__FILE__)
     set :static, true
     set :public_folder,  File.expand_path('../public', __FILE__)
@@ -14,8 +14,13 @@ module Supervisor
     set :haml, { :format => :html5 }
     set :port, 4567
 
-    if defined? Supervisor::Server
-      Supervisor.initialize_servers
+    if (Supervisor.methods - Object.methods).count > 1
+      begin
+        Supervisor.class_eval("initialize_servers")
+        Supervisor.class_eval("establish_connection")
+      rescue
+        p "Supervisor libraries not loaded. Partial functionality"
+      end
     end
 
     def delayed_job
