@@ -40,7 +40,7 @@ module Supervisor
         ActiveRecord::Base.clear_reloadable_connections!
       end
       begin
-        db = DelayedJobMonitor[:database]
+        db = Supervisor[:database]
         connection =  ActiveRecord::Base.establish_connection(:adapter => db["adapter"],:database => db["database"],:host=>db["host"],:port=>db["port"],:username=>db["username"],:password=>db["password"],:encoding => "utf8",:template=>"template0")
         return connection
       rescue
@@ -59,10 +59,10 @@ module Supervisor
   end
 
   def self.initialize_servers
-    if Supevisor[:hosts].first["host"].nil? && !delayed_job_running_locally
+    if Supervisor[:hosts].first["host"].nil? && !delayed_job_running_locally
       raise "No job worker machines (host) configured and no workers running locally. Please add host in config.yml"
-    elsif Supevisor[:hosts].first["host"].nil? && delayed_job_running_locally
-      DelayedJobMonitor::Server.new
+    elsif Supervisor[:hosts].first["host"].nil? && delayed_job_running_locally
+      Supervisor::Server.new
     else
       Supervisor[:hosts].each do |host|
         Supervisor::Server.new(host["name"],host["host"],host["rails_path"],host["username"],host["password"])
