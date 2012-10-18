@@ -1,4 +1,4 @@
-require 'supervisor'
+require './lib/supervisor.rb'
 begin
   Supervisor.start!
 rescue
