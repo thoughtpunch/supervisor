@@ -6,7 +6,7 @@ require 'haml'
 
 module Supervisor
   class App < Sinatra::Base	
-    require "supervisor"
+    require "./lib/supervisor.rb"
   	set :root, File.dirname(__FILE__)
     set :static, true
     set :public_folder,  File.expand_path('../public', __FILE__)
