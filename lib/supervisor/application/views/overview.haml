@@ -63,15 +63,16 @@
         %th Run Time
       - if Supervisor::Server.servers.any?
         - Supervisor::Server.servers.each do |server|
-          -server.delayed_job_workers.each do |worker|
-            %tr
-              %td= worker.host
-              %td= worker.name.split(".").last
-              %td= worker.pid
-              %td= worker.cpu
-              %td= worker.mem
-              %td= worker.started
-              %td= worker.run_time
+          - if server.delayed_job_workers.any?
+            -server.delayed_job_workers.each do |worker|
+              %tr
+                %td= worker.host
+                %td= worker.name.split(".").last
+                %td= worker.pid
+                %td= worker.cpu
+                %td= worker.mem
+                %td= worker.started
+                %td= worker.run_time
   = poll
 -#.right_col
   .logs
