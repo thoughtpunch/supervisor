@@ -63,7 +63,7 @@
         %th Run Time
       - if Supervisor::Server.servers.any?
         - Supervisor::Server.servers.each do |server|
-          - if server.delayed_job_workers.any?
+          - if server.delayed_job_workers
             -server.delayed_job_workers.each do |worker|
               %tr
                 %td= worker.host

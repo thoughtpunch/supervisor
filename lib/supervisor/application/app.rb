@@ -13,6 +13,7 @@ module Supervisor
     set :views,  File.expand_path('../views', __FILE__)
     set :haml, { :format => :html5 }
     set :port, 4567
+    set :bind, 'localhost'
 
     if (Supervisor.methods - Object.methods).count > 1
       begin
